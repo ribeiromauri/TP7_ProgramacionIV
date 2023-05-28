@@ -14,7 +14,7 @@
 	<h2>Agregar Seguros</h2>
 	<!-- Agregar servlet al form -->
 	<div>
-	<form action="/serverletsSeguro" method="get">
+	<form action="serverletsSeguros" method="get">
 		<label>ID Seguro</label>
 		 <br/>
 		<label for="txtDescripcion">Descripción</label>		
