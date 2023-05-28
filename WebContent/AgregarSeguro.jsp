@@ -14,7 +14,7 @@
 	<h2>Agregar Seguros</h2>
 	<!-- Agregar servlet al form -->
 	<div>
-	<form>
+	<form action="/serverletsSeguro" method="get">
 		<label>ID Seguro</label>
 		 <br/>
 		<label for="txtDescripcion">Descripción</label>		
@@ -36,5 +36,18 @@
 		<input type="submit" name="btnAceptar" value="Aceptar" />		
 	</form>
 	</div>
+	
+	<%
+	int filas = 0;
+ 	if(request.getAttribute("cantidadFilas") != null){
+ 		 filas = Integer.parseInt(request.getAttribute("cantidadFilas").toString());
+			
+			if(filas == 1){
+				%>
+				Seguro agregado correctamente!
+				<%
+			}
+ 	}
+	%>
 </body>
 </html>
