@@ -1,8 +1,12 @@
 package serverlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import dominio.Seguros;
 import dominio.SegurosDao;
+import dominio.TipoSeguro;
+import dominio.TipoSeguroDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,28 +30,34 @@ public class serverletsSeguros extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String descripcion = "";
-		int tipoSeguro = 0;
-		float costoContratacion = 0;
-		float costoMaxAsegurado = 0;
-		int filas = 0;
+		/*TipoSeguroDao Tipo = new TipoSeguroDao();
 		
-		if(request.getParameter("btnAceptar") != null)
+		List<TipoSeguro> ListaTiposdeSeguros = Tipo.ListarTiposdeSeguros();
+		
+		request.setAttribute("TiposdeSeguro", ListaTiposdeSeguros);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguro.jsp"); 
+		rd.forward(request, response);
+		
+		if(request.getParameter("btnAceptar") != null)*/
+		int filas = 0;
 		{
 			Seguros seguroNuevo = new Seguros();
-			descripcion = request.getParameter("txtDescripcion");
-			tipoSeguro = Integer.parseInt(request.getParameter("tipoSeguro"));
-			costoContratacion = Float.parseFloat(request.getParameter("txtCostoContratacion"));
-			costoMaxAsegurado = Float.parseFloat(request.getParameter("txtCostoMaximo"));
+			
+			seguroNuevo.setDescripcion(request.getParameter("txtDescripcion"));
+			seguroNuevo.setTipoSeguro(Integer.parseInt(request.getParameter("tipoSeguro")));
+			seguroNuevo.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion")));
+			seguroNuevo.setCostoMaxAsegurado(Float.parseFloat(request.getParameter("txtCostoMaximo")));
 			
 			SegurosDao sDao = new SegurosDao();
 			filas = sDao.agregarSeguro(seguroNuevo);
 			
 			//REQUESTDISPATCHER
 			request.setAttribute("cantidadFilas", filas);
-			RequestDispatcher rd = request.getRequestDispatcher("/AgregarSeguro.jsp"); 
-			rd.forward(request, response);
+			RequestDispatcher rd2 = request.getRequestDispatcher("/AgregarSeguro.jsp"); 
+			rd2.forward(request, response);
 		}
+		
 	}
 
 
