@@ -45,6 +45,7 @@ public class serverletsSeguros extends HttpServlet
 		{
 			Seguros seguroNuevo = new Seguros();
 			
+			seguroNuevo.setID(Integer.parseInt(request.getParameter("txtID")));
 			seguroNuevo.setDescripcion(request.getParameter("txtDescripcion"));
 			seguroNuevo.setTipoSeguro(Integer.parseInt(request.getParameter("tipoSeguro")));
 			seguroNuevo.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion")));
@@ -64,10 +65,28 @@ public class serverletsSeguros extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-
 		SegurosDao sDao = new SegurosDao();
-		ArrayList<Seguros> listaSeguros = sDao.obtenerSeguros();
+		ArrayList<Seguros> listaSeguros = null;
+		String filtro = "Sin filtro";
+		
+		if(Integer.parseInt(request.getParameter("tipoSeguros").toString()) == -1) {
+			listaSeguros = sDao.obtenerSeguros();
+			filtro = "Sin filtro";
+		}else {			
+			listaSeguros = sDao.obtenerSegurosFiltro(Integer.parseInt(request.getParameter("tipoSeguros").toString()));
+			
+			if(Integer.parseInt(request.getParameter("tipoSeguros").toString()) == 1) {				
+				filtro = "Seguro de casas";
+			}
+			if(Integer.parseInt(request.getParameter("tipoSeguros").toString()) == 2) {				
+				filtro = "Seguro de vida";
+			}
+			if(Integer.parseInt(request.getParameter("tipoSeguros").toString()) == 3) {				
+				filtro = "Seguro de motos";
+			}
+		}
 
+		request.setAttribute("filtro", filtro);
 		request.setAttribute("listaSeguros", listaSeguros);
 		RequestDispatcher rd = request.getRequestDispatcher("/ListarSeguros.jsp"); 
 		rd.forward(request, response);

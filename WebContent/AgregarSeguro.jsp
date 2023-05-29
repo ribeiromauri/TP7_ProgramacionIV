@@ -1,5 +1,7 @@
 <%@page import="java.util.ListIterator"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Seguros"%>
+<%@page import="dominio.SegurosDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="java.util.List"%>
@@ -20,9 +22,11 @@
 	<!-- Agregar servlet al form -->
 	<div>
 		<form action="serverletsSeguros" method="get">
-			<label>ID Seguro</label>
-			<br/>
-			<label for="txtDescripcion">Descripci�n</label>		
+			<label>ID Seguro</label><%SegurosDao seguroDao = new SegurosDao();
+			int cantidad = seguroDao.obtenerSeguros().size(); %> 
+			<%=cantidad+1 %>
+			<input type="hidden" name="txtID" value="<%=cantidad+1 %>"> <br>
+			<label for="txtDescripcion">Descripcion</label>		
 			<input id="txtDescripcion" type="text" name="txtDescripcion"/>
 			<br/>
 			<label for="tipoSeguro">Tipo de seguro</label>
@@ -53,10 +57,10 @@
 			</select>
 			
 			<br/>
-			<label for="txtCostoContratacion">Costo contrataci�n</label>
+			<label for="txtCostoContratacion">Costo contratacion</label>
 			<input id="txtCostoContratacion" name="txtCostoContratacion" type="text"/>
 			 <br/>
-			<label for="txtCostoMaximo">Costo m�ximo asegurado</label>
+			<label for="txtCostoMaximo">Costo maximo asegurado</label>
 			<input id="txtCostoMaximo" name="txtCostoMaximo" type="text"/>
 			<br/>
 			<input type="submit" name="btnAceptar" value="Aceptar" />		

@@ -31,4 +31,11 @@ public class TipoSeguro
 		this.descripcion = descripcion;
 	}
 
+	@Override
+	public String toString() {
+		return descripcion;
+	}
+
+	
+	
 }

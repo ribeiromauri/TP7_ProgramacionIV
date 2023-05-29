@@ -1,6 +1,9 @@
 <%@page import="java.util.ListIterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dominio.Seguros"%>
+<%@page import="dominio.SegurosDao"%>
+<%@page import="dominio.TipoSeguro"%>
+<%@page import="dominio.TipoSeguroDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,10 +21,28 @@
 	<p>Busqueda por tipo de Seguros: </p> 
 	<form action="serverletsSeguros" method="post">
 		<select name="tipoSeguros" id="tipoSeguros">
-			<option value="tipoSeguros">Tipo de seguros</option>
 			<!-- Tipos de seguros de la DB -->
+			<jsp:useBean id="cn" class="dominio.TipoSeguroDao" scope="page"></jsp:useBean>
+			<%ArrayList list = cn.ListarTiposdeSeguros(); %>
+			<option value="-1">Escoge una Opcion: </option>
+				<%
+				ListIterator <TipoSeguro> it = list.listIterator();
+				while(it.hasNext())
+				{
+					TipoSeguro obj = it.next();
+				%>
+				<option value="<%= obj.getID()%>"><%= obj.getDescripcion() %></option>
+				<%
+				}%>
 		</select>
 		<input type="submit" name="btnFiltrar" value="Filtrar" />
+		<%String filtro = "Sin filtro"; %>
+		<p>Filtro:
+		<%if(request.getAttribute("filtro") != null){
+			filtro = (String) request.getAttribute("filtro"); 
+		}%>
+		<%= filtro %>
+		</p>
 	</form>	
 	
 	  <%

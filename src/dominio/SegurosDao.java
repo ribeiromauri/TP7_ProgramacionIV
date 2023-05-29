@@ -118,8 +118,8 @@ public class SegurosDao {
 	}
 
 	
-	public Seguros obtenerUnUsuario(int id)
-	{
+	public ArrayList<Seguros> obtenerSegurosFiltro(int idTipoSeguro) {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -127,31 +127,39 @@ public class SegurosDao {
 			e.printStackTrace();
 		}
 		
-		Seguros seguro = new Seguros();
-		Connection con = null;
+		ArrayList<Seguros> lista = new ArrayList<Seguros>();
+		Connection conn = null;
 		try{
-			con = DriverManager.getConnection(host + dbName, user, pass);
-			PreparedStatement miSentencia = con.prepareStatement("Select * from seguros where idSeguro = ?");
-			miSentencia.setInt(1, id); //Cargo el ID recibido
-			ResultSet resultado = miSentencia.executeQuery();
-			resultado.next();
+			conn = DriverManager.getConnection(host + dbName, user, pass);
+			Statement st = conn.createStatement();
 			
-			seguro.setID(resultado.getInt(1));
-			seguro.setDescripcion(resultado.getString(2));
-			seguro.setTipoSeguro(resultado.getInt(3));
-		    seguro.setCostoContratacion(resultado.getFloat(4));
-		    seguro.setCostoMaxAsegurado(resultado.getFloat(5));
+			ResultSet rs = st.executeQuery("Select idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM seguros where idTipo = "+ idTipoSeguro);
 			
-		    con.close();
+			while(rs.next()){
+				
+				Seguros segurosRs = new Seguros();
+				segurosRs.setID(rs.getInt("idSeguro"));
+				segurosRs.setDescripcion(rs.getString("descripcion"));
+				segurosRs.setTipoSeguro(rs.getInt("idTipo"));
+				segurosRs.setCostoContratacion(rs.getFloat("costoContratacion"));
+				segurosRs.setCostoMaxAsegurado(rs.getFloat("costoAsegurado"));
+				
+				lista.add(segurosRs);
+			}
+			
+			conn.close();
+			
 		}
 		catch(Exception e)
 		{
-			System.out.println("Conexion fallida");
+			e.printStackTrace();
 		}
 		finally
 		{
+		
 		}
-		return seguro;
+		
+		return lista;
 	}
 	
 }
