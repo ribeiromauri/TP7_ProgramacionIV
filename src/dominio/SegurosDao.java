@@ -88,7 +88,7 @@ public class SegurosDao {
 			conn = DriverManager.getConnection(host + dbName, user, pass);
 			Statement st = conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("Select idSeguro, descripcion, idTipo,c ostoContratacion, costoAsegurado FROM seguros");
+			ResultSet rs = st.executeQuery("Select idSeguro, descripcion, idTipo, costoContratacion, costoAsegurado FROM seguros");
 			
 			while(rs.next()){
 				

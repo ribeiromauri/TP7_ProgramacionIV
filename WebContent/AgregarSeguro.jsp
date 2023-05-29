@@ -22,7 +22,7 @@
 		<form action="serverletsSeguros" method="get">
 			<label>ID Seguro</label>
 			<br/>
-			<label for="txtDescripcion">Descripción</label>		
+			<label for="txtDescripcion">Descripciï¿½n</label>		
 			<input id="txtDescripcion" type="text" name="txtDescripcion"/>
 			<br/>
 			<label for="tipoSeguro">Tipo de seguro</label>
@@ -39,7 +39,7 @@
 			
 			<jsp:useBean id="cn" class="dominio.TipoSeguroDao" scope="page"></jsp:useBean>
 			<%ArrayList list = cn.ListarTiposdeSeguros(); %>
-			<select>
+			<select name="tipoSeguro">
 				<option>Escoge una Opcion: </option>
 				<%
 				ListIterator <TipoSeguro> it = list.listIterator();
@@ -53,10 +53,10 @@
 			</select>
 			
 			<br/>
-			<label for="txtCostoContratacion">Costo contratación</label>
+			<label for="txtCostoContratacion">Costo contrataciï¿½n</label>
 			<input id="txtCostoContratacion" name="txtCostoContratacion" type="text"/>
 			 <br/>
-			<label for="txtCostoMaximo">Costo máximo asegurado</label>
+			<label for="txtCostoMaximo">Costo mï¿½ximo asegurado</label>
 			<input id="txtCostoMaximo" name="txtCostoMaximo" type="text"/>
 			<br/>
 			<input type="submit" name="btnAceptar" value="Aceptar" />		

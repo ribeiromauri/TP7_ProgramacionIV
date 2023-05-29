@@ -1,3 +1,6 @@
+<%@page import="java.util.ListIterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Seguros"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +16,7 @@
 	
 	<h2>Tipo de seguros de la base de datos</h2>
 	<p>Busqueda por tipo de Seguros: </p> 
-	<form>
+	<form action="serverletsSeguros" method="post">
 		<select name="tipoSeguros" id="tipoSeguros">
 			<option value="tipoSeguros">Tipo de seguros</option>
 			<!-- Tipos de seguros de la DB -->
@@ -21,7 +24,15 @@
 		<input type="submit" name="btnFiltrar" value="Filtrar" />
 	</form>	
 	
-	<table>
+	  <%
+ 	 	ArrayList<Seguros> listaSeguros = new ArrayList<Seguros>();
+  		if(request.getAttribute("listaSeguros") != null){
+		  listaSeguros = (ArrayList<Seguros>)request.getAttribute("listaSeguros");
+	  
+  		}
+  	%>
+  
+	<table border="1">
     <tr>
       <th>ID Seguro</th>
       <th>Descripcion del seguro</th>
@@ -29,14 +40,21 @@
       <th>Costo de contratación</th>
       <th>Costo máximo asegurado</th>
     </tr>
-    <tr>
-    <!-- Información desde la DB -->
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    
+	<% if(listaSeguros.size() > 0)
+	{
+		for(Seguros seguro : listaSeguros){%>
+   	 	<tr>
+     	 	<td><%=seguro.getID() %></td>
+     	 	<td><%=seguro.getDescripcion() %></td>
+      		<td></td>
+      		<td><%=seguro.getCostoContratacion() %></td>
+    	  	<td><%=seguro.getCostoMaxAsegurado() %></td>
+   	 	</tr>
+   		 <%}
+	} %>
   </table>
+  
+
 </body>
 </html>

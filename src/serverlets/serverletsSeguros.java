@@ -1,6 +1,7 @@
 package serverlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import dominio.Seguros;
@@ -63,7 +64,13 @@ public class serverletsSeguros extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		doGet(request, response);
+
+		SegurosDao sDao = new SegurosDao();
+		ArrayList<Seguros> listaSeguros = sDao.obtenerSeguros();
+
+		request.setAttribute("listaSeguros", listaSeguros);
+		RequestDispatcher rd = request.getRequestDispatcher("/ListarSeguros.jsp"); 
+		rd.forward(request, response);
 	}
 
 }
