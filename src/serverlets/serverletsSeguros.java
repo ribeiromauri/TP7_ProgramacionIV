@@ -47,7 +47,13 @@ public class serverletsSeguros extends HttpServlet
 			
 			seguroNuevo.setID(Integer.parseInt(request.getParameter("txtID")));
 			seguroNuevo.setDescripcion(request.getParameter("txtDescripcion"));
-			seguroNuevo.setTipoSeguro(Integer.parseInt(request.getParameter("tipoSeguro")));
+			
+			TipoSeguroDao tsd = new TipoSeguroDao();
+			TipoSeguro tipoSeguroRs = new TipoSeguro();
+			tipoSeguroRs.setID(Integer.parseInt(request.getParameter("tipoSeguro")));
+			tipoSeguroRs.setDescripcion(tsd.devolverDescripcion(Integer.parseInt(request.getParameter("tipoSeguro"))));
+			
+			seguroNuevo.setTipoSeguro(tipoSeguroRs);
 			seguroNuevo.setCostoContratacion(Float.parseFloat(request.getParameter("txtCostoContratacion")));
 			seguroNuevo.setCostoMaxAsegurado(Float.parseFloat(request.getParameter("txtCostoMaximo")));
 			

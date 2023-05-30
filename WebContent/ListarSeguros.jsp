@@ -68,7 +68,7 @@
    	 	<tr>
      	 	<td><%=seguro.getID() %></td>
      	 	<td><%=seguro.getDescripcion() %></td>
-      		<td></td>
+      		<td><%=seguro.getTipoSeguro().getDescripcion() %></td>
       		<td><%=seguro.getCostoContratacion() %></td>
     	  	<td><%=seguro.getCostoMaxAsegurado() %></td>
    	 	</tr>

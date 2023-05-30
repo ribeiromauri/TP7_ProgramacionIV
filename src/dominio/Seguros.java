@@ -4,13 +4,13 @@ public class Seguros {
 	
 	private int ID;
 	private String descripcion;
-	private int tipoSeguro;
+	private TipoSeguro tipoSeguro;
 	private float costoContratacion;
 	private float costoMaxAsegurado;
 	
 	public Seguros() {}
 	
-	public Seguros(int ide, String desc, int tiposeguro, float costCont, float costMaxAseg) {
+	public Seguros(int ide, String desc, TipoSeguro tiposeguro, float costCont, float costMaxAseg) {
 		this.ID = ide;
 		this.descripcion = desc;
 		this.tipoSeguro = tiposeguro;
@@ -34,11 +34,11 @@ public class Seguros {
 		this.descripcion = descripcion;
 	}
 
-	public int getTipoSeguro() {
+	public TipoSeguro getTipoSeguro() {
 		return tipoSeguro;
 	}
 
-	public void setTipoSeguro(int tipoSeguro) {
+	public void setTipoSeguro(TipoSeguro tipoSeguro) {
 		this.tipoSeguro = tipoSeguro;
 	}
 

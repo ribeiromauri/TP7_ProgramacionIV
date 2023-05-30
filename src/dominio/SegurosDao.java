@@ -95,7 +95,13 @@ public class SegurosDao {
 				Seguros segurosRs = new Seguros();
 				segurosRs.setID(rs.getInt("idSeguro"));
 				segurosRs.setDescripcion(rs.getString("descripcion"));
-				segurosRs.setTipoSeguro(rs.getInt("idTipo"));
+				
+				TipoSeguroDao tsd = new TipoSeguroDao();
+				TipoSeguro tipoSeguroRs = new TipoSeguro();
+				tipoSeguroRs.setID(rs.getInt("idTipo"));
+				tipoSeguroRs.setDescripcion(tsd.devolverDescripcion(rs.getInt("idTipo")));
+				
+				segurosRs.setTipoSeguro(tipoSeguroRs);
 				segurosRs.setCostoContratacion(rs.getFloat("costoContratacion"));
 				segurosRs.setCostoMaxAsegurado(rs.getFloat("costoAsegurado"));
 				
@@ -140,7 +146,13 @@ public class SegurosDao {
 				Seguros segurosRs = new Seguros();
 				segurosRs.setID(rs.getInt("idSeguro"));
 				segurosRs.setDescripcion(rs.getString("descripcion"));
-				segurosRs.setTipoSeguro(rs.getInt("idTipo"));
+				
+				TipoSeguroDao tsd = new TipoSeguroDao();
+				TipoSeguro tipoSeguroRs = new TipoSeguro();
+				tipoSeguroRs.setID(rs.getInt("idTipo"));
+				tipoSeguroRs.setDescripcion(tsd.devolverDescripcion(idTipoSeguro));
+				
+				segurosRs.setTipoSeguro(tipoSeguroRs);
 				segurosRs.setCostoContratacion(rs.getFloat("costoContratacion"));
 				segurosRs.setCostoMaxAsegurado(rs.getFloat("costoAsegurado"));
 				

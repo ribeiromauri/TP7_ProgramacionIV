@@ -59,4 +59,38 @@ public class TipoSeguroDao
 		return lista;
 	}
 	
+public String devolverDescripcion(int id) {
+		
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		String descripcion = null;
+		try
+		{
+			ArrayList<TipoSeguro> lista = ListarTiposdeSeguros();
+			
+			for (TipoSeguro x : lista) {
+				if(x.getID()==id) {
+					descripcion = x.getDescripcion();
+				}
+			}
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+		
+		}
+		
+		return descripcion;
+	}
 }
